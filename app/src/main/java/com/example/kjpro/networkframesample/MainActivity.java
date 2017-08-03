@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.kjpro.networkframesample.module.module1.BlankFragment;
 import com.example.kjpro.networkframesample.utils.FragmentUtils;
+import com.example.kjpro.networkframesample.utils.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -141,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements BlankFragment.OnF
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
-
+    public void onFragmentInteraction(String str) {
+        ToastUtils.showShort(str);
     }
 }
