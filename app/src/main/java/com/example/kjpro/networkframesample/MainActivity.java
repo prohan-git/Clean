@@ -54,6 +54,9 @@ public class MainActivity extends AppCompatActivity {
         initToolBar();
     }
 
+    /**
+     * 初始化Listener
+     */
     private void initListener() {
         //抽屉点击
         navigationItemSelectedListener = new NavigationView.OnNavigationItemSelectedListener() {
@@ -71,6 +74,9 @@ public class MainActivity extends AppCompatActivity {
         };
     }
 
+    /**
+     * 初始化ToolBar
+     */
     private void initToolBar() {
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -81,6 +87,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * 初始化NavigationView，以及内容
+     */
     private void initNavigationView() {
         navigationView.setNavigationItemSelectedListener(navigationItemSelectedListener);
         View headerView = navigationView.getHeaderView(0);
@@ -88,6 +97,9 @@ public class MainActivity extends AppCompatActivity {
         mUserName.setText("tijun");
     }
 
+    /**
+     * 初始化Fragment
+     */
     private void initFragments() {
     }
 
@@ -127,7 +139,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
+    /**
+     * 网络请求
+     * @param key
+     */
     private void search(String key) {
 
         subscription = RetrofitHelper.getBaseApi()
