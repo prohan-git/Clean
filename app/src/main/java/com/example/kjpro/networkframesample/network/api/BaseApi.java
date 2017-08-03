@@ -6,6 +6,7 @@ import com.example.kjpro.networkframesample.network.requestBody.PostRequestBody;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -31,11 +32,11 @@ import rx.Observable;
  ****/
 public interface BaseApi {
     @GET("product/search")
-    Observable<List<ZhuangbiImage>> search3(@QueryMap Map<String, String> query);
+    Observable<ZhuangbiImage> search3(@QueryMap Map<String, String> query);
 
     @POST("product/search")
-    Observable<List<ZhuangbiImage>> search1(@Body PostRequestBody postAction);
+    Observable<ZhuangbiImage> search1(@Body PostRequestBody postAction);
 
     @POST("product/search")
-    Observable<List<ZhuangbiImage>> search2(@Query("key") String key, @Query("pageNumber") String pageNumber, @Query("sortField") String sortField);
+    Observable<ZhuangbiImage> search2(@Query("key") String key, @Query("pageNumber") String pageNumber, @Query("sortField") String sortField);
 }

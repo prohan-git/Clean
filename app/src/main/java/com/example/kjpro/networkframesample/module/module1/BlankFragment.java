@@ -7,15 +7,26 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.kjpro.networkframesample.R;
+
 import com.example.kjpro.networkframesample.model.ZhuangbiImage;
 import com.example.kjpro.networkframesample.network.RetrofitHelper;
+import com.example.kjpro.networkframesample.network.api.ZhuangbiApi;
 import com.example.kjpro.networkframesample.network.requestBody.PostRequestBody;
+import com.example.kjpro.networkframesample.utils.ToastUtils;
 import com.orhanobut.logger.Logger;
 
-import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
+import rx.Observable;
+import rx.Observer;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -34,7 +45,7 @@ import rx.schedulers.Schedulers;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link BlankFragment.OnFragmentInteractionListener} interface
+ * {@link OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link BlankFragment#newInstance} factory method to
  * create an instance of this fragment.
@@ -42,30 +53,42 @@ import rx.schedulers.Schedulers;
 
 public class BlankFragment extends Fragment {
     protected Subscription subscription;
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
+    Unbinder unbinder;
+    @BindView(R.id.edit_search)
+    EditText editSearch;
+    @BindView(R.id.btn_search)
+    Button btnSearch;
+    @BindView(R.id.text_result)
+    TextView textResult;
+
     private String mParam1;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    Observer<ZhuangbiImage> observer = new Observer<ZhuangbiImage>() {
 
-    public BlankFragment() {
-        // Required empty public constructor
+        @Override
+        public void onCompleted() {
+
+        }
+
+        @Override
+        public void onError(Throwable e) {
+
+        }
+
+        @Override
+        public void onNext(ZhuangbiImage zhuangbiImage) {
+
+        }
+    };
+
+    public BlankFragment() {// Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment BlankFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static BlankFragment newInstance(String param1, String param2) {
         BlankFragment fragment = new BlankFragment();
         Bundle args = new Bundle();
@@ -87,13 +110,17 @@ public class BlankFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_blank, container, false);
-        //        search("装逼");
+        View view = inflater.inflate(R.layout.fragment_blank, container, false);
+        unbinder = ButterKnife.bind(this, view);
+        return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
+    /**
+     * interface must be implemented by activities
+     *
+     * @param uri
+     */
+    public void onCallBackActivitys(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
@@ -116,21 +143,11 @@ public class BlankFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
-
 
     /**
      * 网络请求
@@ -138,28 +155,35 @@ public class BlankFragment extends Fragment {
      * @param key
      */
     private void search(String key) {
-
+        // .search1(new PostAction("Converse诞生于1908", "1", "comp"))
+        //.search3(new PostRequestBody("Converse诞生于1908", "1", "comp").init())
         subscription = RetrofitHelper.getBaseApi()
-                //.search2("Converse诞生于1908","1","comp")
-                // .search1(new PostAction("Converse诞生于1908", "1", "comp"))
-                .search3(new PostRequestBody("Converse诞生于1908", "1", "comp").init())
+                .search2(key, "1", "comp")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<ZhuangbiImage>>() {
-                    @Override
-                    public void onCompleted() {
-                        Logger.d("onCompleted");
-                    }
+                .subscribe(zhuangbiImages -> textResult.setText("reault" + zhuangbiImages.toString())
+                        , throwable -> ToastUtils.showShort("数据加载失败！！！"));
 
-                    @Override
-                    public void onError(Throwable e) {
-                        Logger.d("onError" + e.getMessage());
-                    }
-
-                    @Override
-                    public void onNext(List<ZhuangbiImage> zhuangbiImages) {
-                        Logger.d("onNext你好");
-                    }
-                });
+        // .subscribe(observer);
     }
+
+    /**
+     * 显示结果
+     */
+    @OnClick(R.id.btn_search)
+    public void onViewClicked() {
+        search(editSearch.getText().toString());
+    }
+
+
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     */
+    public interface OnFragmentInteractionListener {
+        void onFragmentInteraction(Uri uri);
+    }
+
 }

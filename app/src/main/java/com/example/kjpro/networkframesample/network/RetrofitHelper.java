@@ -60,7 +60,6 @@ public class RetrofitHelper {
         return retrofit.create(clazz);
     }
 
-
     /**
      * 初始化OKHttpClient,设置缓存,设置超时时间,设置打印日志,设置UA拦截器
      */

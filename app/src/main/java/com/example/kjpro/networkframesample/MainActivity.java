@@ -1,5 +1,6 @@
 package com.example.kjpro.networkframesample;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -19,7 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import rx.Subscription;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements BlankFragment.OnFragmentInteractionListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -94,14 +95,18 @@ public class MainActivity extends AppCompatActivity {
         BlankFragment statisticsFragment = (BlankFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.contentFrame);
         if (statisticsFragment == null) {
-            statisticsFragment = BlankFragment.newInstance("1","2");
+            statisticsFragment = BlankFragment.newInstance("1", "2");
             FragmentUtils.addFragment(getSupportFragmentManager(), statisticsFragment, R.id.contentFrame);
         }
     }
 
     @Override
     public void onBackPressed() {
-        toggleDrawer();
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override
@@ -133,5 +138,10 @@ public class MainActivity extends AppCompatActivity {
         } else {
             drawer.openDrawer(GravityCompat.START);
         }
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }
