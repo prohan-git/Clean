@@ -1,6 +1,4 @@
-package com.example.kjpro.networkframesample.network.enyc;
-
-import com.orhanobut.logger.Logger;
+package com.example.kjpro.networkframesample.network.encrypt;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -13,7 +11,7 @@ import java.util.Map;
  *  Version:         1.0.0.1
  *  Created:         Tijun on 2017/8/2 0002 16:09.
  *  E-mail:          prohankj@outlook.com
- *  Desc: 
+ *  Desc:           加密工具类
  * </pre>            
  ****/
 public class EncryptionAnnoUtil {
@@ -37,9 +35,10 @@ public class EncryptionAnnoUtil {
                     /**
                      * 加密
                      */
-                    if (field.isAnnotationPresent(EncyptionAnno.class)) {
+                    if (field.isAnnotationPresent(EncyptAnno.class)) {
                         //valus = RSACoder.encryptByPubkey(Configure.pubkey, valus);
                         //valus = valus + "加密";
+                        // FIXME: 2017/8/3 0003 valus = "加密valus"
                     }
                     stringMap.put(name, valus);
                 }

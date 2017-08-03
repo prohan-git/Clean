@@ -7,7 +7,7 @@ package com.example.kjpro.networkframesample.network;
  *  Version:         1.0.0.1
  *  Created:         Tijun on 2017/8/1 0001 10:35.
  *  E-mail:          prohankj@outlook.com
- *  Desc: 
+ *  Desc:            定义URL
  * </pre>            
  ****/
 public class ApiConstants {

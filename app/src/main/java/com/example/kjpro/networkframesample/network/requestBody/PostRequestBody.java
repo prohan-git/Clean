@@ -1,4 +1,7 @@
-package com.example.kjpro.networkframesample.network.enyc;
+package com.example.kjpro.networkframesample.network.requestBody;
+
+import com.example.kjpro.networkframesample.network.encrypt.EncyptAnno;
+import com.example.kjpro.networkframesample.network.encrypt.ParentRequestBody;
 
 /****
  * </pre> 
@@ -7,13 +10,13 @@ package com.example.kjpro.networkframesample.network.enyc;
  *  Version:         1.0.0.1
  *  Created:         Tijun on 2017/8/2 0002 11:09.
  *  E-mail:          prohankj@outlook.com
- *  Desc: 
+ *  Desc:            调用父类的init可返回加密后的Map类型参数
  * </pre>            
  ****/
-public class PostAction {
-    @EncyptionAnno
+public class PostRequestBody extends ParentRequestBody {
+    @EncyptAnno
     private String key;
-    @EncyptionAnno
+    @EncyptAnno
     private String pageNumber;
     private String sortField;
 
@@ -29,10 +32,9 @@ public class PostAction {
         this.sortField = sortField;
     }
 
-    public PostAction(String key, String pageNumber, String sortField) {
+    public PostRequestBody(String key, String pageNumber, String sortField) {
         this.key = key;
         this.pageNumber = pageNumber;
         this.sortField = sortField;
     }
-
 }

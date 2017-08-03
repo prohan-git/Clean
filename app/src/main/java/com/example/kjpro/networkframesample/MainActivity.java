@@ -1,7 +1,6 @@
 package com.example.kjpro.networkframesample;
 
 import android.os.Bundle;
-
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -13,8 +12,7 @@ import android.view.MenuItem;
 
 import com.example.kjpro.networkframesample.model.ZhuangbiImage;
 import com.example.kjpro.networkframesample.network.RetrofitHelper;
-import com.example.kjpro.networkframesample.network.enyc.EncryptionAnnoUtil;
-import com.example.kjpro.networkframesample.network.enyc.PostAction;
+import com.example.kjpro.networkframesample.network.requestBody.PostRequestBody;
 import com.orhanobut.logger.Logger;
 
 import java.util.List;
@@ -102,13 +100,13 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @SuppressWarnings("unchecked")
     private void search(String key) {
+
 
         subscription = RetrofitHelper.getBaseApi()
                 //.search2("Converse诞生于1908","1","comp")
                 // .search1(new PostAction("Converse诞生于1908", "1", "comp"))
-                .search3(EncryptionAnnoUtil.getEncry(new PostAction("Converse诞生于1908", "1", "comp")))
+                .search3(new PostRequestBody("Converse诞生于1908", "1", "comp").init())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<ZhuangbiImage>>() {
