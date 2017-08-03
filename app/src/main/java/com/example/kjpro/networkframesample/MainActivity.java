@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -13,22 +12,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.kjpro.networkframesample.model.ZhuangbiImage;
-import com.example.kjpro.networkframesample.network.RetrofitHelper;
-import com.example.kjpro.networkframesample.network.requestBody.PostRequestBody;
-import com.orhanobut.logger.Logger;
-
-import java.util.List;
+import com.example.kjpro.networkframesample.module.module1.BlankFragment;
+import com.example.kjpro.networkframesample.utils.FragmentUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import rx.Subscriber;
 import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
-    protected Subscription subscription;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -65,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
 
                 switch (item.getItemId()) {
                     case R.id.nav_camera:
-                        search("装逼");
                         return true;
                 }
                 toggleDrawer();
@@ -101,6 +91,12 @@ public class MainActivity extends AppCompatActivity {
      * 初始化Fragment
      */
     private void initFragments() {
+        BlankFragment statisticsFragment = (BlankFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.contentFrame);
+        if (statisticsFragment == null) {
+            statisticsFragment = BlankFragment.newInstance("1","2");
+            FragmentUtils.addFragment(getSupportFragmentManager(), statisticsFragment, R.id.contentFrame);
+        }
     }
 
     @Override
@@ -137,35 +133,5 @@ public class MainActivity extends AppCompatActivity {
         } else {
             drawer.openDrawer(GravityCompat.START);
         }
-    }
-
-    /**
-     * 网络请求
-     * @param key
-     */
-    private void search(String key) {
-
-        subscription = RetrofitHelper.getBaseApi()
-                //.search2("Converse诞生于1908","1","comp")
-                // .search1(new PostAction("Converse诞生于1908", "1", "comp"))
-                .search3(new PostRequestBody("Converse诞生于1908", "1", "comp").init())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<ZhuangbiImage>>() {
-                    @Override
-                    public void onCompleted() {
-                        Logger.d("onCompleted");
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Logger.d("onError" + e.getMessage());
-                    }
-
-                    @Override
-                    public void onNext(List<ZhuangbiImage> zhuangbiImages) {
-                        Logger.d("onNext你好");
-                    }
-                });
     }
 }
