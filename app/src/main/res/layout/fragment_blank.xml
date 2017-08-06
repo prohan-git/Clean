@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.kjpro.networkframesample.module.module1.BlankFragment">
+    tools:context="com.example.kjpro.networkframesample.com.example.Tjun.networkframesample.module.module1.BlankFragment">
 
     <EditText
         android:id="@+id/edit_search"

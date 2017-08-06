@@ -1,12 +1,9 @@
-package com.example.kjpro.networkframesample.network;
+package com.example.tjun.clean.network;
 
-import android.util.Log;
 
-import com.example.kjpro.networkframesample.BaseAPP;
-import com.example.kjpro.networkframesample.network.api.BaseApi;
-import com.example.kjpro.networkframesample.network.api.ZhuangbiApi;
-import com.example.kjpro.networkframesample.utils.CommonUtil;
-import com.orhanobut.logger.Logger;
+import com.example.tjun.clean.BaseAPP;
+import com.example.tjun.clean.network.api.BaseApi;
+import com.example.tjun.clean.utils.CommonUtil;
 
 import java.io.File;
 import java.io.IOException;

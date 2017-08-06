@@ -1,6 +1,5 @@
-package com.example.kjpro.networkframesample;
+package com.example.tjun.clean;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -13,13 +12,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.kjpro.networkframesample.module.module1.BlankFragment;
-import com.example.kjpro.networkframesample.utils.FragmentUtils;
-import com.example.kjpro.networkframesample.utils.ToastUtils;
+
+
+import com.example.tjun.clean.module.module1.BlankFragment;
+import com.example.tjun.clean.utils.FragmentUtils;
+import com.example.tjun.clean.utils.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import rx.Subscription;
 
 public class MainActivity extends AppCompatActivity implements BlankFragment.OnFragmentInteractionListener {
 

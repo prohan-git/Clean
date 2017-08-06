@@ -1,12 +1,12 @@
-package com.example.kjpro.networkframesample.network.api;
+package com.example.tjun.clean.network.api;
 
-import com.example.kjpro.networkframesample.model.ZhuangbiImage;
-import com.example.kjpro.networkframesample.network.requestBody.PostRequestBody;
 
-import java.util.List;
+
+import com.example.tjun.clean.model.ZhuangbiImage;
+import com.example.tjun.clean.network.requestBody.PostRequestBody;
+
 import java.util.Map;
 
-import okhttp3.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;

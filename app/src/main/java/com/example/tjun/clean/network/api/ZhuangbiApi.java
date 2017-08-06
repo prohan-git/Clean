@@ -1,6 +1,8 @@
-package com.example.kjpro.networkframesample.network.api;
+package com.example.tjun.clean.network.api;
 
-import com.example.kjpro.networkframesample.model.ZhuangbiImage;
+
+
+import com.example.tjun.clean.model.ZhuangbiImage;
 
 import java.util.List;
 
