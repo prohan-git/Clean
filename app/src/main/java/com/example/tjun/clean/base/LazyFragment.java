@@ -6,8 +6,6 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 
 
-import com.example.tjun.clean.module.module1.BlankFragment;
-
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import rx.Subscription;
@@ -44,7 +42,7 @@ public abstract class LazyFragment extends Fragment {
     //标志位 fragment是否可见
     protected boolean isVisible;
 
-    public BlankFragment.OnFragmentInteractionListener mListener;
+    public OnFragmentInteractionListener mListener;
 
     protected Unbinder unbind;
     protected Subscription subscription;
@@ -60,8 +58,8 @@ public abstract class LazyFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof BlankFragment.OnFragmentInteractionListener) {
-            mListener = (BlankFragment.OnFragmentInteractionListener) context;
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");

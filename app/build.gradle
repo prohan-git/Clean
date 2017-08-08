@@ -10,6 +10,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
@@ -28,7 +29,7 @@ allprojects {
     }
 }
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -36,7 +37,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     implementation 'com.android.support:design:26.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-
     implementation 'com.squareup.retrofit2:retrofit:2.0.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.0.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava:2.0.0'
@@ -45,11 +45,11 @@ dependencies {
     implementation 'io.reactivex:rxandroid:1.2.1'
     implementation 'io.reactivex:rxjava:1.1.8'
     //implementation 'com.trello:rxlifecycle-components:0.6.1'
-
     implementation 'com.jakewharton:butterknife:8.7.0'
     annotationProcessor "com.jakewharton:butterknife-compiler:8.7.0"
     implementation 'com.orhanobut:logger:2.1.1'
-
-
     implementation 'com.android.support:support-v4:26.0.0'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+    implementation 'com.squareup.leakcanary:leakcanary-android:1.5.1'
+    implementation 'com.android.support:support-vector-drawable:26.0.0-beta2'
 }

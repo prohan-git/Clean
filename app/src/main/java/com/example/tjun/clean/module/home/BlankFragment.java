@@ -1,4 +1,4 @@
-package com.example.tjun.clean.module.module1;
+package com.example.tjun.clean.module.home;
 
 
 import android.os.Bundle;
@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 
 import com.example.tjun.clean.R;
 import com.example.tjun.clean.base.LazyFragment;
